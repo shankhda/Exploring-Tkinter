@@ -50,7 +50,7 @@ def saveFile():
         file.close()
 
 def aboutMessage():
-    messagebox.showinfo("About","This text editor was created while exploring tkinter python module.")
+    tkinter.messagebox.showinfo("About","This text editor was created while exploring tkinter python module.")
     
 
 #Main Menu 
@@ -61,18 +61,25 @@ root.config(menu = mainMenu)
 fileMenu= Menu(mainMenu)
 mainMenu.add_cascade(label="File", menu=fileMenu)
 
-fileMenu.add_command(label= "New", command = newFile)
-fileMenu.add_command(label= "Open...",command = openFile)
-fileMenu.add_command(label= "Save", command = saveFile)
-fileMenu.add_command(label= "Exit", command=userExit)
+fileMenuLables = ["New", "Open", "Save", "Exit"]
+fileMenuCommands = [newFile, openFile, saveFile, userExit]
+
+for index in range(len(fileMenuLables)):
+    fileMenu.add_command(label= fileMenuLables[index], command = fileMenuCommands[index])
 
 #Edit Menu
 editMenu= Menu(mainMenu)
 mainMenu.add_cascade(label="Edit", menu=editMenu)
 
-editMenu.add_command(label= "Cut",  accelerator="Ctrl+X", command=lambda: root.event_generate('<Control-x>'))
-editMenu.add_command(label= "Copy", accelerator="Ctrl+C", command=lambda: root.event_generate('<Control-c>'))
-editMenu.add_command(label= "Paste", accelerator="Ctrl+V", command=lambda: root.event_generate('<Control-v>'))
+editMenuLables = ["Cut", "Copy", "Paste"]
+editMenuAccelerator = ["Ctrl+X", "Ctrl+C", "Ctrl+V"]
+editMenuCommands = [lambda: root.event_generate('<Control-x>'),
+                    lambda: root.event_generate('<Control-c>'),
+                    lambda: root.event_generate('<Control-v>')]
+
+for index in range(len(editMenuLables)):
+    editMenu.add_command(label= editMenuLables[index],  accelerator=editMenuAccelerator[index], command=editMenuCommands[index])
+
 
 #About message
 mainMenu.add_command(label="About", command= aboutMessage)

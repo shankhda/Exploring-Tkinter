@@ -21,19 +21,38 @@ def userExit():
         root.destroy()
         
 def newFile():
-    #If user clicks on new file, empty the text area
-    text.delete("0.0", END)
+        if tkinter.messagebox.askyesno('Unsaved Changes', 'Save Existing Work?'):
+                fileName  = tkinter.filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
+                if fileName:
+                    fileContent = text.get(1.0, END)
+                    open(fileName, 'w').write(fileContent)
+                else:
+                    if tkinter.messagebox.askyesno('Text Editor', 'Open Existing File?'):
+                        text.delete(1.0, END)
+                        file = tkinter.filedialog.askopenfile(parent = root, mode = 'r', title = "Select a file to open")
+                    if (file!=None):
+                            #If file is selected, read contents
+                            fileContent = file.read ()
+                            #Delete the existing text in the text area
+                            text.delete("0.0", END)
+                            #Insert file content to text area
+                            text.insert("0.0", fileContent)
+                    else:
+                            text.delete("0.0", END)       
+        else:
+            text.delete("0.0", END)
+
     
 def openFile():
-    #Get file
-    file = tkinter.filedialog.askopenfile(parent = root, mode = 'r', title = "Select a file to open")
-    if (file!=None):
+        #Get file
+        file = tkinter.filedialog.askopenfile(parent = root, mode = 'r', title = "Select a file to open")
+        if (file!=None):
         #If file is selected, read contents
-        fileContent = file.read ()
-        #Delete the existing text in the text area
-        text.delete("0.0", END)
-        #Insert file content to text area
-        text.insert("0.0", fileContent)
+                fileContent = file.read ()
+                #Delete the existing text in the text area
+                text.delete("0.0", END)
+                #Insert file content to text area
+                text.insert("0.0", fileContent)
         
     
 def saveFile():

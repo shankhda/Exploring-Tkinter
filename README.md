@@ -1,6 +1,6 @@
  
 # Python text editor
-This app is basically a simple text editior. Funtionality includes: Open a file, save a file, create a new file, cut, copy & paste text from the menu bar, exit the program from the menu bar.
+This app is basically a simple text editor. Functionality includes: Open a file, save a file, create a new file, cut, copy & paste text from the menu bar, exit the program from the menu bar.
 
 # Motivation
 I came across a datacamp article about using tkinter python module to create your own gui. The article got me intrigued about this module and I decided to try it out myself.
